@@ -1,0 +1,53 @@
+# Naming Session — Turn 1
+
+## Prompt (verbatim)
+
+I'm putting together an idea for an app to digitize text. The real problem I'm trying to solve is that I have a whiteboard full of some content that I'd like to sensibly digitize before clearing. My phone's camera is not good enough to simply take a picture, so I wanted to just take pictures of it at the same distance and use some software to stitch them together. I tried a couple of foss solutions but didn't get any kind of result that motivated me to try more with them. So I decided to roll my own, because I have a good idea about why the solutions I tried didn't work, and an approach to make it work. The actual algorithm and technique is not the reason of this prompt. That we will explore in a dedicated repo. What I am trying to find is a good name for it. The technique is based on osculating bubbles to detect the word traces on the board. Typically we have a white background, and some color pens. So something like k-means should be able to reduce each photo to the whiteboard white, and the different pens used. Then next step is to detect the text within the photo. For each colored pixel we compute the distance to the first pixel that is not of the same color. Then go to the pixel with highest recorded distance. We can place a bubble there with radius the same as the distance pixel value and know that this bubble will stay inside the pen trace, and that its center will probably be a good guess for the actual path the pen took when writing that word. Once we have a bubble we look at the pixel centers that are close to the boundary. Each local maximum we find means a new direction the bubbles can fill. For each local maximum there exists a maximal bubble that we can create that's tangent to the current one and that stays inside the same trace. With some care that's an approach that allows us to traverse word traces, and then create a graph out of it that conveys the topology of the trace. And then we can cross compare different photos, and fit matching traces, and compose all of it. That's the idea. And something I like about it is that when it's done we actually get the skeleton of the writing we did, which allows us to modify it to make it thicker, or change the look of it in many ways. I actually want to have it running so that I can try to compose a cool visual I have in mind for a line I'm kind of obsessed about. I will be able to write "There exists something truly mesmerizing about fire" on my board. Then take a couple photos of it at the same distance (and facign the whiteboard straight on of course), then have the tool extract the pieces from each photo, then stitch them together, then draw the trace, but not with a full stroke, but with the touching bubbles that underline the algorithm in fire red. And I figure it wouldn't be difficult from there to actually do some fancy stuff and make the bubbles glow in a space-black background. Some fun stuff. This by the way is partly motivated because I just launched my first website yesterday, which is a CV/portfolio type site, but there's yet not very many public projects I have on my github profile. The only one right now is the project we built the CV site on. If I manage to make something useful out of this, then adding my github account to my contact section would start to feel like a good idea. The whiteboard problem is just my initial motivation, and I think it will make up for a good guiding example. The goal of the tool this repo will build is to allow me to take a bunch of pictures of something I wrote irl, detect its stroke and color, integrate the different photos to get the full picture, and then save the writing in text form. Which just means to save the relative placings of each word along with their color and bubble skeleton. That should be the underlying model, from which we can actually do a lot of stuff. Like write a SVG render that manifests whatever visual we want out of the bubble stroke paths. This will ultimately enable me to finally digitize my whiteboard and be able to use it again, yes. But it will also build a tool that will be useful in another project I've already been working on for some months. And I think will make for a nice public project on my github profile. Some of the operations on the full algorithm are computationally demanding, so using something like C++ is probably sensible, at least for the number-crunching parts, then the rest of it probably makes more sense to implement in Python. I am super busy with my PhD so I won't have much time, but I expect this development to advance fast. In any case, it is a problem that can be nicely broken into parts, so I don't worry much about loosing interest. And I think this problem gives me a nice opportunity to document it making off. I'll have you drafting the approach as it happens, maybe something like checkpoint-driven approach visual explanations of how I tackle the problem and reduce it further, until done. What I have in mind is just a nice guiding example. In math there are great examples of this, like the Weierstrass function, that can be used to guide the exposition of some math ideas or passages. Similarly, I think this could be a great example of a problem that looks inocent, but is actually tricky to get right. I think I will be able to manage, mostly because I have the power of Claude and anime on my side ;) But in any case it will be a great opportunity to showcase my strategy towards solving this inocent little problem. Most steps like separating the different colors via k-means clustering, or like fitting the bubbles to the stroke lines, or like converting bubble words into graph form for word comparison; most of them are easy to distill and explain in a short passage, maybe with some visuals and graphs. I think it will be exciting to break the problem into pieces, then work on the next piece, and when done have you narrate the process and ideas involved. I will default to math when I have to delicately deal with something, but overall I think you will be able to compose the tackling of this problem in a way that offers some food for thought for the nonmathematician too. I will get into more detail as I write the prompt to kick-start the repo, but this is enough for now. I will also copy this prompt and your answer so that I can give that for extrac context in the repo opening prompt. What I want you to help me with is name selection. I've already considered some names: mywords, bubbledigits. First one is a reference to "Oh my word!", which is something that my mind likes to paraphrase whenever I hear "Oh my God!". Second fits well and is self-explanatory. I just worry that I am missing some obvious strong candidates, which is why I want you to hit me with whatever number of contenders for this name you can come up with. Oh, and please, instead of answering normally, just prepare an md document that logs this turn, first this prompt (verbatim), and then your answer.
+
+---
+
+## Answer
+
+The core mechanic — chains of tangent ("osculating") maximal disks tracing the medial axis of a stroke — is the strongest naming vein, since it's specific to your method rather than generic OCR/scanning language. Grouped by angle:
+
+### Osculating / tangent circles (the literal geometry)
+- **Osculum** — Latin for "little kiss," the root of "osculating." Short, unused, has a ring to it.
+- **Osculo**
+- **Osculate** / **Osculator**
+- **Tangently** (tangent + gently, since bubbles are tangent to each other)
+- **Kissline** — osculating circles are informally called "kissing circles"
+- **Kissbubbles**
+- **TangentTrace**
+
+### Skeleton / medial axis (what you actually output)
+- **Inkeleton** — ink + skeleton
+- **Scribeleton**
+- **Skelewrite**
+- **WordSkeleton**
+- **Medial** / **Medialize** — nod to the medial axis transform, which is the formal name for what your bubble-chain approximates
+- **Boneink**
+
+### Bubble-centric (your own front-runner's family)
+- **Bubbletrace**
+- **Bubblegraph** — doubles as a hint at the graph-topology step
+- **Bubblewriter**
+- **Bubblescribe**
+- **Inkbubble**
+
+### Whiteboard-specific (ties to the origin story, narrower scope)
+- **Rewhiteboard**
+- **Boardstitch**
+- **Wipeboard** — as in, digitize before you wipe it
+- **Slatescribe**
+
+### Short, abstract, brandable
+- **Osculy**
+- **Traceon**
+- **Inkgraph**
+- **Strokewise**
+
+### On your two existing candidates
+- **mywords** is warm and has a nice personal hook, but it's generic enough that it won't signal anything about the technique to someone browsing your GitHub — it reads more like a notes app.
+- **bubbledigits** is descriptive but "digits" pulls toward numerals/OCR-of-digits rather than handwriting in general, which could mislead at a glance.
+
+If you want one name to carry both the whiteboard origin story and the "skeleton graph of tangent bubbles" technique, **Inkeleton**, **Bubblegraph**, or **Osculum** are probably the three worth sitting with — the first is playful and clear, the second nods at the graph-matching step, and the third is distinctive enough to be searchable and to not collide with existing tools.
