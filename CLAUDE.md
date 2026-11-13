@@ -34,7 +34,9 @@ A new session begins whenever Jonatan starts a fresh conversation here.
      verbatim**, where `<model>` is whichever model actually produced the turn.
 
   Two blank lines between turns; append every later turn of the session to the
-  same file. Times are approximate, the date reliable.
+  same file. Times are approximate, the date reliable. Log the prompt the
+  moment it arrives, before any work on it, and the answer right before
+  submitting it.
 
 
 ## Documentation stays in the present
